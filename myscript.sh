@@ -6,7 +6,6 @@ echo "============================================================"
 
 
 sudo apt update && sudo apt dist-upgrade -y
-
 sudo apt install wget curl zsh tmux dirsearch vim remmina terminator openjdk-17-jdk -y
 
 echo "============================================================"
@@ -38,12 +37,9 @@ sudo apt install brave-browser -y
 echo "============================================================"
 echo "Installing zellij"
 echo "============================================================"
-
 wget https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz
-
 tar -xzvf zellij-x86_64-unknown-linux-musl.tar.gz
-
-cp zellij /usr/bin/zellij
+sudo cp zellij /usr/bin/zellij
 
 
 #optional
@@ -61,15 +57,23 @@ mv config ~/.config/terminator/config
 read -p "Do you want to reinistall impacket (y/n): " choice
 
 if [[ $choice == "y" ]]; then
-	sudo apt remove impacket-scripts
-	sudo apt remove python3-impacket
+	sudo apt remove impacket-scripts -y
+	sudo apt remove python3-impacket -y
         sudo apt install pipx -y
 	python3 -m pipx install impacket
 fi
 
 echo "============================================================"
+echo "Doing some clean up"
+echo "============================================================"
+
+sudo apt autoremove && sudo apt autoclean -y
+
+
+echo "============================================================"
 echo "Installing Oh-My-ZSH"
 echo "============================================================"
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp .zshrc ~/.zshrc
 
