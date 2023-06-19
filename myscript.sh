@@ -33,17 +33,6 @@ mv vpn ~/vpn
 mv .tmux.conf ~/.tmux.conf
 mv config ~/.config/terminator/config
 
-echo "Installing Oh-My-ZSH"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp .zshrc ~/.zshrc
-
-echo "Plugins for ZSH"
-#autosuggestion
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-#syntaxhighlighter
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
 read -p "Do you want to reinistall impacket (y/n): " choice
 
 if [[ $choice == "y" ]]; then
@@ -52,6 +41,15 @@ if [[ $choice == "y" ]]; then
         sudo apt install pipx -y
 	python3 -m pipx install impacket
 fi
+
+echo "Plugins for ZSH"
+#autosuggestion
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+echo "Installing Oh-My-ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp .zshrc ~/.zshrc
+
 
 
 

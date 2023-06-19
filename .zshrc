@@ -106,16 +106,14 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /home/sz/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/sz/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/sz/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 alias academy="sudo openvpn '/home/sz/vpn/academy.ovpn'"
 alias htb="sudo openvpn '/home/sz/vpn/htb.ovpn'"
 alias thm="sudo openvpn '/home/sz/vpn/thm.ovpn'"
 alias com="sudo openvpn '/home/sz/vpn/com.ovpn'"
 alias gen="sudo openvpn '/home/sz/vpn/Genesis.ovpn'"
 alias cpts="sudo openvpn '/home/sz/vpn/cpts.ovpn'"
-alias burp="java \-jar /opt/burppro/burploader.jar&"
+
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
