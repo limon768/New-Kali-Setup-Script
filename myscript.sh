@@ -1,22 +1,22 @@
 #!/bin/bash
-echo "\n============================================================\n"
-echo "My personal script to setup a new VM\n"
+echo "============================================================"
+echo "My personal script to setup a new VM"
 echo "Installing common tools"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 
 
 sudo apt update && sudo apt dist-upgrade -y
 
 sudo apt install wget curl zsh tmux dirsearch vim remmina terminator openjdk-17-jdk -y
 
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Installing VsCode"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 sudo apt -y install code-oss
 
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Installing Sublime"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 sleep 5
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https
@@ -24,9 +24,9 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install sublime-text
 
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Installing Brave"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 sleep 5
 sudo apt install curl
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -34,13 +34,29 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 sudo apt update
 sudo apt install brave-browser -y
 
+
+echo "============================================================"
+echo "Installing zellij"
+echo "============================================================"
+
+wget https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz
+
+tar -xzvf zellij-x86_64-unknown-linux-musl.tar.gz
+
+cp zellij /usr/bin/zellij
+
+
 #optional
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Moving VPN files"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 mv vpn ~/vpn
 mv .tmux.conf ~/.tmux.conf
 mv config ~/.config/terminator/config
+
+
+
+
 
 read -p "Do you want to reinistall impacket (y/n): " choice
 
@@ -51,16 +67,16 @@ if [[ $choice == "y" ]]; then
 	python3 -m pipx install impacket
 fi
 
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Installing Oh-My-ZSH"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp .zshrc ~/.zshrc
 
 ## Might have to restart the script
-echo "\n============================================================\n"
+echo "============================================================"
 echo "Plugins for ZSH"
-echo "\n\n============================================================\n\n"
+echo "============================================================"
 #autosuggestion
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
