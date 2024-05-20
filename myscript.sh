@@ -9,6 +9,12 @@ sudo apt update && sudo apt dist-upgrade -y
 sudo apt install wget curl zsh tmux dirsearch vim remmina terminator openjdk-17-jdk -y
 
 echo "============================================================"
+echo "Installing OS dependens"
+echo "============================================================"
+sudo apt-get install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
+sudo apt-get install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+
+echo "============================================================"
 echo "Installing VsCode"
 echo "============================================================"
 sudo apt -y install code-oss
