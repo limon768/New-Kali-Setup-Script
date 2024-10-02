@@ -6,7 +6,7 @@ echo "============================================================"
 
 
 sudo apt update && sudo apt dist-upgrade -y
-sudo apt install wget curl zsh tmux dirsearch feroxbuster vim remmina terminator openjdk-17-jdk npm neo4j bloodhound -y
+sudo apt install wget curl zsh tmux dirsearch feroxbuster vim remmina terminator openjdk-17-jdk npm neo4j bloodhound netexec keepassxc rlwrap golang -y
 sudo apt update && sudo apt install pipx
 
 echo "============================================================"
@@ -15,16 +15,70 @@ echo "============================================================"
 sudo apt-get install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
 sudo apt-get install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
+# Create a Tools folder in Home ~/
 echo "============================================================"
-echo "Installing tools"
+echo "Create a Tools folder"
 echo "============================================================"
-sudo apt -y install code-oss
+sleep 5
+mkdir ~/tools
+cd ~/tools/
+echo -e "\e[32mDone!"; echo "";
+sleep 1.5
 
 echo "============================================================"
 echo "Installing tools"
 echo "============================================================"
+sudo apt -y install code-oss
 pip3 install certipy-ad
+pip3 install bloodyAD
+sudo python3 -m pip install coercer
 python3 -m pipx install impacket
+go install github.com/cmepw/myph@latest
+
+echo "[+] Installing gMSADumper"
+
+git clone https://github.com/micahvandeusen/gMSADumper.git
+cd gMSADumper
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/gMSADumper/gMSADumper.py /usr/local/bin/gMSADumper.py
+cd -
+
+echo "[+] Installing LAPSDumper"
+git clone https://github.com/n00py/LAPSDumper.git
+cd LAPSDumper
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/LAPSDumper/laps.py /usr/local/bin/laps.py
+cd -
+
+echo "[+] Installing pyGPOAbuse"
+git clone https://github.com/Hackndo/pyGPOAbuse.git
+cd pyGPOAbuse
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/pyGPOAbuse/pygpoabuse.py /usr/local/bin/pygpoabuse.py
+cd -
+
+echo "[+] Installing pywhisker"
+git clone https://github.com/ShutdownRepo/pywhisker.git
+cd pywhisker
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/pywhisker/pywhisker.py /usr/local/bin/pywhisker.py
+cd -
+
+echo "[+] Installing targetedKerberoast"
+git clone https://github.com/ShutdownRepo/targetedKerberoast.git
+cd targetedKerberoast
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/targetedKerberoast/targetedKerberoast.py /usr/local/bin/targetedKerberoast.py
+cd -
+
+git clone https://github.com/brightio/penelope.git
+cd penelope
+pip3 install -r requirements.txt
+sudo ln -s /home/sz/tools/penelope/penelope.py /usr/local/bin/penelope.py
+cd -
+
+
+git clone https://github.com/topotam/PetitPotam.git
 
 echo "============================================================"
 echo "Installing Sublime"
@@ -45,16 +99,7 @@ sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://b
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
 sudo apt install brave-browser -y
-
-# Create a Tools folder in Home ~/
-echo "============================================================"
-echo -e "\e[93m\e[1m----> Create a Tools folder"
-echo "============================================================"
 sleep 5
-mkdir ~/tools
-cd ~/tools/
-echo -e "\e[32mDone!"; echo "";
-sleep 1.5
 
 echo "============================================================"
 echo "Installing Exegol"
@@ -96,6 +141,7 @@ go mod download github.com/ugorji/go
 cd ..
 make ts-build
 make client-build
+cd ~/tools
 
 echo "============================================================"
 echo "Installing zellij"
@@ -103,6 +149,7 @@ echo "============================================================"
 wget https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz
 tar -xzvf zellij-x86_64-unknown-linux-musl.tar.gz
 sudo cp zellij /usr/bin/zellij
+rm ~/tools/zelli*
 
 
 #optional
@@ -114,17 +161,6 @@ mv .tmux.conf ~/.tmux.conf
 mv config ~/.config/terminator/config
 
 
-
-
-
-read -p "Do you want to reinistall impacket (y/n): " choice
-
-if [[ $choice == "y" ]]; then
-	sudo apt remove impacket-scripts -y
-	sudo apt remove python3-impacket -y
-        sudo apt install pipx -y
-	python3 -m pipx install impacket
-fi
 
 echo "============================================================"
 echo "Doing some clean up"
@@ -139,6 +175,12 @@ echo "============================================================"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cp .zshrc ~/.zshrc
+
+## Might have to restart the script
+echo "============================================================"
+echo "Opening ZELLIJ"
+echo "============================================================"
+zellij options --disable-mouse-mode
 
 ## Might have to restart the script
 echo "============================================================"
