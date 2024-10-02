@@ -30,8 +30,8 @@ sleep 1.5
 
 # Create a Tools folder in Home ~/
 echo -e "\e[93m\e[1m----> Create a Tools folder"
-mkdir ~/apps
-cd ~/apps/
+mkdir ~/tools
+cd ~/tools/
 echo -e "\e[32mDone!"; echo "";
 sleep 1.5
 
