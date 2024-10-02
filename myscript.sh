@@ -7,6 +7,7 @@ echo "============================================================"
 
 sudo apt update && sudo apt dist-upgrade -y
 sudo apt install wget curl zsh tmux dirsearch feroxbuster vim remmina terminator openjdk-17-jdk npm neo4j bloodhound -y
+sudo apt update && sudo apt install pipx
 
 echo "============================================================"
 echo "Installing OS dependens"
