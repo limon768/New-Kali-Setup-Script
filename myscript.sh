@@ -106,6 +106,11 @@ echo "Installing Exegol"
 echo "============================================================"
 sleep 5
 curl -fsSL "https://get.docker.com/" | sh
+sudo apt install -y docker.io
+sudo systemctl enable docker --now
+sudo usermod -aG docker $(whoami)
+groups $(whoami)
+newgrp docker
 # add the sudo group to the user
 sudo usermod -aG docker $(id -u -n)
 # "reload" the user groups with the newly added docker group
@@ -187,8 +192,8 @@ echo "============================================================"
 echo "Plugins for ZSH"
 echo "============================================================"
 #autosuggestion
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/sz/.oh-my-zsh/zsh-syntax-highlighting/
 
 
 echo "GG DONE"
